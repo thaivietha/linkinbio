@@ -119,7 +119,13 @@
                             
                             
 <div id="biolink_block_id_22" data-biolink-block-id="22" class="col-12 my-2">
-    <a href="https://www.f8betv9.com/?a=210420" data-track-biolink-block-id="22" target="_blank" rel="dofollow" class="btn btn-block btn-primary link-btn link-hover-animation link-btn-rounded  animate__animated animate__ animate__false animate__delay-2s" style="background: #fff;color: #000;border-width: 0px;border-color: #000;border-style: solid;box-shadow: 0px 0px 20px 0px #00000010;text-align: center;" data-text-color="" data-border-width="" data-border-radius="" data-border-style="" data-border-color="" data-border-shadow="" data-animation="" data-background-color="" data-text-alignment="">
+    <a href="" data-track-biolink-block-id="22" target="_blank" rel="dofollow" 
+            class="btn btn-block btn-primary link-btn link-hover-animation link-btn-rounded  animate__animated animate__ animate__false animate__delay-2s" 
+            style="background: #fff;color: #000;border-width: 0px;border-color: #000;border-style: solid;box-shadow: 0px 0px 20px 0px #00000010;text-align: center;" 
+            data-text-color="" data-border-width="" data-border-radius="" data-border-style="" data-border-color="" data-border-shadow="" data-animation="" d
+            ata-background-color="" data-text-alignment=""
+            id="nutzalo"
+            >
         <div class="link-btn-image-wrapper link-btn-rounded">
             <img src="./f8final_files/907baa39be7f3025870fdbd41491701e.webp" class="link-btn-image" loading="lazy">
         </div>
@@ -127,7 +133,7 @@
         <span data-icon="">
                     </span>
 
-        <span data-name="">Hoặc nhắn tin zalo 0562155273 bạn nhé</span>
+        <span data-name="">Hoặc click vào đây để nhắn tin zalo 0562155273 bạn nhé</span>
     </a>
 </div>
 
@@ -197,6 +203,32 @@
             navigator.sendBeacon(`${site_url}l/link?biolink_block_id=${biolink_block_id}&no_redirect`);
         });
     });
+</script>
+<script>
+    function isMobileDevice() {
+      return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    }
+    const nutzalo = document.getElementById('nutzalo');
+    function ZaloClick() {
+      let link;
+      if (isMobileDevice()) {
+			if (navigator.userAgent.includes('Android')) {
+			  // android	
+			  link = 'https://zaloapp.com/qr/p/c2xvaw4dckrx';
+			  // với link này để mở zalo điện thoại anh em chỉ cần vào cá nhân / lấy "Mã QR của tôi" sau đó lưu mã lấy đt quét mã đó rồi copy link ở trình duyệt dán vào đây
+			} else {
+			  // ios
+			  link = 'zalo://qr/p/c2xvaw4dckrx';
+			  // lấy đoạn link phía sau ở phần quét mã qr thay vào "1riodiamu9r6v" là được
+			}
+      } else {
+        // link mở zalo pc
+        link = 'zalo://conversation?phone=0562155273';
+		// với link này để mở zalo pc anh em chỉ cần thay sđt zalo phía sau "0359355369"
+      }
+      window.open(link, '_blank');
+    }
+    nutzalo.addEventListener('click', ZaloClick);
 </script>
 
 
