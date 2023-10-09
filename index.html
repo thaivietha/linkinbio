@@ -119,7 +119,7 @@
                             
                             
 <div id="biolink_block_id_22" data-biolink-block-id="22" class="col-12 my-2">
-    <a href="" data-track-biolink-block-id="22" target="_blank" rel="dofollow" 
+    <a href="https://zalo.me/0562155273" data-track-biolink-block-id="22" target="_blank" rel="dofollow" 
             class="btn btn-block btn-primary link-btn link-hover-animation link-btn-rounded  animate__animated animate__ animate__false animate__delay-2s" 
             style="background: #fff;color: #000;border-width: 0px;border-color: #000;border-style: solid;box-shadow: 0px 0px 20px 0px #00000010;text-align: center;" 
             data-text-color="" data-border-width="" data-border-radius="" data-border-style="" data-border-color="" data-border-shadow="" data-animation="" d
@@ -204,7 +204,7 @@
         });
     });
 </script>
-<script>
+<!-- <script>
     function isMobileDevice() {
       return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     }
@@ -230,7 +230,117 @@
     }
     nutzalo.addEventListener('click', ZaloClick);
 </script>
+ -->
+<script type="text/javascript">
+/*
+* Code sửa lỗi link zalo.me/{sđt}
+* Author: levantoan.com
+*/
+var zalo_acc = {
+        "0562155273" : "c2xvaw4dckrx",
+    };
+    function devvnCheckLinkAvailability(link, successCallback, errorCallback) {
+        var hiddenIframe = document.querySelector("#hiddenIframe");
+        if (!hiddenIframe) {
+            hiddenIframe = document.createElement("iframe");
+            hiddenIframe.id = "hiddenIframe";
+            hiddenIframe.style.display = "none";
+            document.body.appendChild(hiddenIframe);
+        }
+        var timeout = setTimeout(function () {
+            errorCallback("Link is not supported.");
+            window.removeEventListener("blur", handleBlur);
+        }, 2500); // Đặt timeout (2.5 giây) để kiểm tra liên kết. Thay đổi số này lên 5000 nếu bạn chưa chạy được
+        var result = {};
+        function handleMouseMove(event) {
+            if (!result.x) {
+                result = {
+                    x: event.clientX,
+                    y: event.clientY,
+                };
+            }
+        }
+        function handleBlur() {
+            clearTimeout(timeout);
+            window.addEventListener("mousemove", handleMouseMove);
+        }
+        window.addEventListener("blur", handleBlur);
+        window.addEventListener(
+            "focus",
+            function onFocus() {
+                setTimeout(function () {
+                    if (document.hasFocus()) {
+                        successCallback(function (pos) {
+                            if (!pos.x) {
+                                return true;
+                            }
+                            var screenWidth =
+                                window.innerWidth ||
+                                document.documentElement.clientWidth ||
+                                document.body.clientWidth;
+                            var alertWidth = 300;
+                            var alertHeight = 100;
+                            var isXInRange =
+                                pos.x - 100 < 0.5 * (screenWidth + alertWidth) &&
+                                pos.x + 100 > 0.5 * (screenWidth + alertWidth);
+                            var isYInRange =
+                                pos.y - 40 < alertHeight && pos.y + 40 > alertHeight;
+                            return isXInRange && isYInRange
+                                ? "Link can be opened."
+                                : "Link is not supported.";
+                        }(result));
+                    } else {
+                        successCallback("Link can be opened.");
+                    }
+                    window.removeEventListener("focus", onFocus);
+                    window.removeEventListener("blur", handleBlur);
+                    window.removeEventListener("mousemove", handleMouseMove);
+                }, 500);
+            },
+            { once: true }
+        );
+        hiddenIframe.contentWindow.location.href = link;
+    }
+    Object.keys(zalo_acc).map(function(sdt, index) {
+        let qrcode = zalo_acc[sdt];
+        const zaloLinks = document.querySelectorAll('a[href*="zalo.me/'+sdt+'"]');
+        zaloLinks.forEach((zalo) => {
+            zalo.addEventListener("click", (event) => {
+                event.preventDefault();
+                const userAgent = navigator.userAgent.toLowerCase();
+                const isIOS = /iphone|ipad|ipod/.test(userAgent);
+                const isAndroid = /android/.test(userAgent);
+                let redirectURL = null;
+                if (isIOS) {
+                    redirectURL = 'zalo://qr/p/'+qrcode;
+                    window.location.href = redirectURL;
+                } else if (isAndroid) {
+                    redirectURL = 'zalo://zaloapp.com/qr/p/'+qrcode;
+                    window.location.href = redirectURL;
+                } else {
+                    redirectURL = 'zalo://conversation?phone='+sdt;
+                    zalo.classList.add("zalo_loading");
+                    devvnCheckLinkAvailability(
+                        redirectURL,
+                        function (result) {
+                            zalo.classList.remove("zalo_loading");
+                        },
+                        function (error) {
+                            zalo.classList.remove("zalo_loading");
+                            redirectURL = 'https://chat.zalo.me/?phone='+sdt;
+                            window.location.href = redirectURL;
+                        }
+                    );
+                }
+            });
+        });
+    });
+    //Thêm css vào site để lúc ấn trên pc trong lúc chờ check chuyển hướng sẽ không ấn vào thẻ a đó được nữa
+    var styleElement = document.createElement("style");
+    var cssCode = ".zalo_loading { pointer-events: none; }";
+    styleElement.innerHTML = cssCode;
+    document.head.appendChild(styleElement);
 
-
+</script>
 
 </body></html>
